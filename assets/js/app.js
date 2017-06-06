@@ -1,10 +1,13 @@
 var cargarPagina = function () {
 	obtenerUbicacion();
   crearElementos(restaurantes);
-		$("#formularioBusqueda").click(filtrarRestaurantes);
-	$('select').material_select();
-};
+		$("#formularioBusqueda").submit(filtrarRestaurantes);
+		$("#formularioBusqueda").keyup(filtrarRestaurantes);
+		$("#formbutton").click(filtrarRestaurantes);
+		$(".restaurante").click(cambiarUbicacion);
+		$('select').material_select();
 
+};
 var obtenerUbicacion = function (e) {
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(mostrarPosicion);
@@ -41,71 +44,40 @@ var restaurantes  = [
           "direccion":"Parque España 3, Roma Nte., 06700 Ciudad de México, CDMX",
           "tipoDeComida":"Pizza",
           "telefono":"01 55 5351 7401",
-          "coordenadas":{"lat":'19.4182846',
-        "lng":'-99.167457'}
-
-
+          "coordenadas":{
+						"lat":'19.416535',
+        		"lng":'-99.169629'}
         },
         { "nombre":"La Fabbrica Pizza Bar",
         "direccion":"Plaza Villa de Madrid No.22, Cuauhtémoc, Roma Nte., 06700 Ciudad de México, CDMX",
         "tipoDeComida":"Restaurante-bar",
+				"imagen":
         "telefono":"01 55 5514 9553",
-        "coordenadas":{  "lat":'19.4182846',
-        "lng":'-99.167457'}
+				"coordenadas":{  "lat":'19.419306',
+				"lng":'-99.166559'}
 
 
         },
         { "nombre":"Helado Obscuro",
         "direccion":"Orizaba 203, Roma Nte., 06700 Ciudad de México, CDMX",
         "tipoDeComida":"Helado",
+				"imagen":""
         "telefono":"01 55 4444 4878",
-        "coordenadas":{
-            "lat":'19.4141967',
-        "lng":'-99.1679291'}
-
-      },
-      { "nombre":"Pizza del Perro Negro",
-      "direccion":"Parque España 3, Roma Nte., 06700 Ciudad de México, CDMX",
-      "tipoDeComida":"Pizza",
-      "telefono":"01 55 5351 7401",
-      "coordenadas":{    "lat":'19.4182846',
-        "lng":'-99.167457'}
-
-      },
-        { "nombre":"Pizza del Perro Negro",
-      "direccion":"Parque España 3, Roma Nte., 06700 Ciudad de México, CDMX",
-      "tipoDeComida":"Pizza",
-      "telefono":"01 55 5351 7401",
-      "coordenadas":{
-        "lat":'19.4182846',
-      "lng":'-99.167457'
+				"coordenadas":{
+	            "lat":"19.412830",
+        			"lng":'-99.158486'}
+				},
+        { "nombre":"Yuban",
+        "direccion":"Calle Colima 268, Cuauhtémoc, Roma Nte., 06700 Ciudad de México, CDMX",
+        "tipoDeComida":"Restaurante Mexicano",
+				"imagen":""
+        "telefono":"01 55 6387 0358",
+				"coordenadas":{
+	            "lat":"19.418820",
+        			"lng":'-99.164075'}
       }
-
-
-    },{ "nombre":"Pizza del Perro Negro",
-    "direccion":"Parque España 3, Roma Nte., 06700 Ciudad de México, CDMX",
-    "tipoDeComida":"Pizza",
-    "telefono":"01 55 5351 7401",
-    "coordenadas":{
-      "lat":'19.4182846',
-    "lng":'-99.167457'
-    }
-
-
-    },{ "nombre":"Pizza del Perro Negro",
-    "direccion":"Parque España 3, Roma Nte., 06700 Ciudad de México, CDMX",
-    "tipoDeComida":"Pizza",
-    "telefono":"01 55 5351 7401",
-    "coordenadas":{
-      "lat":'19.4182846',
-    "lng":'-99.167457'
-    }
-
-
-    }
   ];
-
-var plantillaRestaurante =  "<article class='restaurante row'> "+
+	var plantillaRestaurante =  "<article class='restaurante row' data-lat='__lat__' data-long='__long__'>"+
                                 '<div class="card horizontal col s12">'+
                                     '<div class="col s4 center-align ">'+
                                     '<img class="circle responsive-img avatar" src="https://dummyimage.com/100x100/f61b67/fff.png&text=this+is+a+bomb" alt="__imagen__"></div>'
@@ -126,6 +98,8 @@ var crearElementos = function(restaurantes){
       .replace("__direccion__", restaurante.direccion)
 			.replace("__TipoComida__", restaurante.tipoDeComida)
       .replace("__telefono__", restaurante.telefono)
+			.replace("__lat__",restaurante.coordenadas.lat)
+			.replace("__long__",restaurante.coordenadas.lng);
 
 	});
 	$(".listadoDeComidas").html(plantillaFinal);
@@ -143,13 +117,19 @@ var filtrarRestaurantes = function (e){
 
 		}else if (criterioBusqueda === "direccion"){
 			return restaurante.direccion.toLowerCase().indexOf(palabraBusqueda) >= 0;
-
 		}else{
-		return "no te encuentras cerca de ese lugar ";
+			return restaurante.nombre.toLowerCase().indexOf(palabraBusqueda) >= 0;
 		}
-	});
+
+		});
 	crearElementos(restaurantesFiltrados);
 };
 
-
+function cambiarUbicacion(){
+    var latitud = Number($(this).data("lat"));
+		var longitud = Number($(this).data("long"));
+		console.log(coordenadas);
+		var coordenadas = { lat:latitud,lng:longitud };
+		mostrarMapa(coordenadas);
+}
 $(document).ready(cargarPagina);
