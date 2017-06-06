@@ -2,12 +2,30 @@ header nav {
   height: 100px;
   max-height: 100px;
 }
-.mapa{
+div.mapa{
   margin-top: 100px;
   height: 400px;
   max-height: 400px;
-  background-color: black
+  background-color: black;
+
+  left: 2em;
+
 }
+
 .avatar{
   margin-top: 1em;
+
+}
+a{
+  text-decoration: none;
+  color: black;
+
+}
+#mapa{
+  padding-top: 1em;
+}
+div.nav-wrapper{
+  background-color: rgb(244, 67, 54);
+  font-family: 'Pacifico', cursive;
+
 }

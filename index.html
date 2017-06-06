@@ -2,19 +2,22 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>foodmap</title>
     <link rel="stylesheet" href="assets/css/materialize.css">
     <link rel="stylesheet" href="assets/css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+
   </head>
   <body>
     <header class="">
       <nav>
         <div class="nav-wrapper">
-          <a href="#" class="brand-logo center col s12"> <h2>FoodMap</h2></a>
+          <a href="#" class="brand-logo center col s12"> <h2>Food Map</h2></a>
         </div>
       </nav>
     </header>
-    <section class="container">
+    <section class="container center" id="mapa">
       <div class="row mapa">
 
       </div>
@@ -33,11 +36,10 @@
                <option value="3">Direccion</option>
              </select>
            </div>
-           <button type="submit" id="formbutton" name="button" class="btn btn-default"> Buscar comida</button>
          </form>
       </div>
     </section>
-    <section class="listadoDeComidas container">
+    <section class="listadoDeComidas container" href="#mapa">
 
     </section>
 
