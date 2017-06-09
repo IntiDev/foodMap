@@ -3,7 +3,7 @@ var cargarPagina = function () {
   crearElementos(restaurantes);
 		$("#formularioBusqueda").submit(filtrarRestaurantes);
 		$("#formularioBusqueda").keyup(filtrarRestaurantes);
-		$(".restaurante").click(cambiarUbicacion);
+		$(document).on("click",".restaurante",cambiarUbicacion);
 		$('select').material_select();
 
 };
@@ -104,14 +104,14 @@ var restaurantes  = [
 					  "imagen":"assets/img/starbucks.png",
 					  "telefono":"01 55 2986 0723",
 					  "coordenadas":{
-					        "lat":"19.416604",
-					          "lng":'-99.166714'}
+					        "lat":"19.4199137",
+					          "lng":'-99.1698923'}
 					  }
   ];
 		var plantillaRestaurante =  "<a href='#mapa'>"+"<article class='restaurante row'  data-lat='__lat__' data-long='__long__'>"+
                                 '<div class="card horizontal col s12">'+
                                     '<div class="col s4 center-align ">'+
-                                    '<img class="circle responsive-img avatar" src="__imgRest__" alt="__imagen__"></div>'
+                                    '<img class="circle responsive-img avatar" src="__imgRest__" alt=" imagenRestaurante"></div>'
                                   +'  <div class="card-stacked col s8 center-align">'+
                                           '<h5>__nombre__</h5>'+ '<div class="card-content">'+
                                           '<p class="direccion">__direccion__</p>'+
